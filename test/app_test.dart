@@ -4,5 +4,11 @@ void main() {
   setUp(
     () {},
   );
+  test(
+    'test',
+    () {
+      print('object');
+    },
+  );
   print('object');
 }
