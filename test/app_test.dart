@@ -4,4 +4,5 @@ void main() {
   setUp(
     () {},
   );
+  print('object');
 }
