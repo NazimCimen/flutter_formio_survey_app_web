@@ -1,7 +1,9 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class FirebaseConstants {
   FirebaseConstants._();
-  static const String defaultRecipeImageUrl =
-      'https://firebasestorage.googleapis.com/v0/b/flutter-recipe-app-af800.appspot.com/o/YUMMY.png?alt=media&token=d151d7da-aa1b-48d7-a25b-92089075b3cc';
-  static const String defaultRecipeStepImageUrl =
-      'https://firebasestorage.googleapis.com/v0/b/flutter-recipe-app-af800.appspot.com/o/YUMMY.png?alt=media&token=d151d7da-aa1b-48d7-a25b-92089075b3cc';
+  static final String defaultRecipeImageUrl =
+      dotenv.env['DEFAULT_RECIPE_IMAGE_URL'] ?? '';
+  static final String defaultRecipeStepImageUrl =
+      dotenv.env['DEFAULT_RECIPE_STEP_IMAGE_URL'] ?? '';
 }
