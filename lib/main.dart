@@ -18,11 +18,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
-
+  await dotenv.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -94,7 +93,7 @@ class MyApp extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => AnswerSurveyView(surveyId: surveyId),
                 settings: const RouteSettings(name: '/answer-survey'),
-              )
+              ),
             ];
           }
           return [
@@ -105,7 +104,7 @@ class MyApp extends StatelessWidget {
           ];
         },
         initialRoute: AppRoutes.initialRoute,
-        //  home: CreateQuestionsView(),
+        // home: CreateQuestionsView(),
       ),
     );
   }
