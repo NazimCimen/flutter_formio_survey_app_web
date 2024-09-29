@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
@@ -58,56 +58,4 @@ jobs:
     - name: Run tests
       run: flutter test
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.0'
-
-    - name: Install dependencies
-      run: flutter pub get
-
-    - name: Create firebase.json for deployment
-      run: |
-        echo "{" > firebase.json
-        echo "  \"flutter\": {" >> firebase.json
-        echo "    \"platforms\": {" >> firebase.json
-        echo "      \"dart\": {" >> firebase.json
-        echo "        \"lib/firebase_options.dart\": {" >> firebase.json
-        echo "          \"projectId\": \"${{ secrets.FIREBASE_PROJECT_ID }}\"," >> firebase.json
-        echo "          \"configurations\": {" >> firebase.json
-        echo "            \"web\": \"${{ secrets.FIREBASE_WEB_CONFIG }}\"" >> firebase.json
-        echo "          }" >> firebase.json
-        echo "        }" >> firebase.json
-        echo "      }" >> firebase.json
-        echo "    }" >> firebase.json
-        echo "  }," >> firebase.json
-        echo "  \"hosting\": {" >> firebase.json
-        echo "    \"public\": \"build/web\"," >> firebase.json
-        echo "    \"ignore\": [" >> firebase.json
-        echo "      \"firebase.json\"," >> firebase.json
-        echo "      \"**/.*\"," >> firebase.json
-        echo "      \"**/node_modules/**\"" >> firebase.json
-        echo "    ]," >> firebase.json
-        echo "    \"rewrites\": [" >> firebase.json
-        echo "      {" >> firebase.json
-        echo "        \"source\": \"**\"," >> firebase.json
-        echo "        \"destination\": \"/index.html\"" >> firebase.json
-        echo "      }" >> firebase.json
-        echo "    ]" >> firebase.json
-        echo "  }" >> firebase.json
-        echo "}" >> firebase.json
-
-    - name: Deploy to Firebase Hosting
-      uses: FirebaseExtended/action-hosting-deploy@v0
-      with:
-        repoToken: "${{ secrets.GITHUB_TOKEN }}"
-        firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-        projectId: "${{ secrets.FIREBASE_PROJECT_ID }}"
+  
