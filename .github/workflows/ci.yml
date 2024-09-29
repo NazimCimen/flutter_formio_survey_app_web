@@ -74,6 +74,37 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
 
+    - name: Create firebase.json for deployment
+      run: |
+        echo "{" > firebase.json
+        echo "  \"flutter\": {" >> firebase.json
+        echo "    \"platforms\": {" >> firebase.json
+        echo "      \"dart\": {" >> firebase.json
+        echo "        \"lib/firebase_options.dart\": {" >> firebase.json
+        echo "          \"projectId\": \"${{ secrets.FIREBASE_PROJECT_ID }}\"," >> firebase.json
+        echo "          \"configurations\": {" >> firebase.json
+        echo "            \"web\": \"${{ secrets.FIREBASE_WEB_CONFIG }}\"" >> firebase.json
+        echo "          }" >> firebase.json
+        echo "        }" >> firebase.json
+        echo "      }" >> firebase.json
+        echo "    }" >> firebase.json
+        echo "  }," >> firebase.json
+        echo "  \"hosting\": {" >> firebase.json
+        echo "    \"public\": \"build/web\"," >> firebase.json
+        echo "    \"ignore\": [" >> firebase.json
+        echo "      \"firebase.json\"," >> firebase.json
+        echo "      \"**/.*\"," >> firebase.json
+        echo "      \"**/node_modules/**\"" >> firebase.json
+        echo "    ]," >> firebase.json
+        echo "    \"rewrites\": [" >> firebase.json
+        echo "      {" >> firebase.json
+        echo "        \"source\": \"**\"," >> firebase.json
+        echo "        \"destination\": \"/index.html\"" >> firebase.json
+        echo "      }" >> firebase.json
+        echo "    ]" >> firebase.json
+        echo "  }" >> firebase.json
+        echo "}" >> firebase.json
+
     - name: Deploy to Firebase Hosting
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
