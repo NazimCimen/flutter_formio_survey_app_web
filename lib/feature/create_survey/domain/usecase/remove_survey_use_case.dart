@@ -1,6 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app_web/core/error/failure.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/domain/repository/create_survey_repository.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
 
 class RemoveSurveyUseCase {
   final CreateSurveyRepository repository;

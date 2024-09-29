@@ -1,5 +1,5 @@
 import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app_web/product/firebase/base_firebase_model.dart';
+import 'package:flutter_survey_app_web/product/firebase/model/base_firebase_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'survey_model.g.dart';
@@ -20,6 +20,8 @@ class SurveyModel extends SurveyEntity
     super.surveyTimeInMinute,
     super.questionCount,
   });
+  @override
+  String? get id => surveyId;
 
   @override
   SurveyModel fromJson(Map<String, dynamic> json) =>

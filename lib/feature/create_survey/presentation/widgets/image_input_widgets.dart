@@ -1,16 +1,7 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_web/core/size/constant_size.dart';
-import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
-import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app_web/product/decorations/box_decorations/custom_box_decoration.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_progress_indicator.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_text_widgets.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/product/export.dart';
 
 class ImageInputWidget extends StatelessWidget {
   final String title;
@@ -46,7 +37,7 @@ class ImageInputWidget extends StatelessWidget {
                 },
                 child: const Icon(Icons.remove_circle_outline),
               ),
-            )
+            ),
           ],
         ),
         SizedBox(height: context.dynamicHeight(0.01)),

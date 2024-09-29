@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_web/core/size/constant_size.dart';
-import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
-import 'package:flutter_survey_app_web/core/size/padding_extension.dart';
-import 'package:flutter_survey_app_web/core/utils/app_validators.dart';
-import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/mixin/survey_info_input_widget_mixin.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
-import 'package:flutter_survey_app_web/responsive/responsive.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/product/constants/custom_shadows.dart';
 
 class CreateSurveyInfoView extends StatefulWidget {
   const CreateSurveyInfoView({super.key});
@@ -68,7 +61,6 @@ class _SurveyInfoInputWidgetState extends State<SurveyInfoInputWidget>
               autovalidateMode: validateMode,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     'Lets Get Start to \nCreate Your Survey',
@@ -188,9 +180,22 @@ class _LeftSide extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            child: Image.asset(
-              ImageEnums.webtest14.toPathPng,
-              fit: BoxFit.contain,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(
+                  size: 40,
+                  Icons.arrow_back_ios_new,
+                  shadows: CustomShadows.customLowShadow(),
+                ),
+                Text(
+                  'Formio',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
             ),
           ),
           const Flexible(
@@ -222,7 +227,7 @@ class _LeftSide extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

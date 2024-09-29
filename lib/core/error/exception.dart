@@ -13,6 +13,11 @@ class ConnectionException implements Exception {
   final String? description;
 }
 
+class TimeoutException implements Exception {
+  TimeoutException(this.description);
+  final String? description;
+}
+
 class UnKnownException implements Exception {
   UnKnownException(this.description);
   final String? description;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_web/core/utils/app_border_radius_extensions.dart';
+import 'package:flutter_survey_app_web/core/size/app_border_radius_extensions.dart';
 import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
 import 'package:flutter_survey_app_web/product/constants/web/feature_items.dart';
 import 'package:flutter_survey_app_web/product/decorations/box_decorations/custom_box_decoration.dart';
@@ -28,7 +28,7 @@ class HeaderDesktop extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              ImageEnums.formioo2.toPathPng,
+              ImageEnums.logo.toPathPng,
               fit: BoxFit.cover,
               height: 27,
             ),

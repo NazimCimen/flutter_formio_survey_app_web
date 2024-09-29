@@ -2,27 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/core/size/constant_size.dart';
 import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
 
-///c:constant
-///d:dynamic
-///dLowValue: dynamic low value
-///cLowValue: constant low value
-extension DynamicSizeExtension on BuildContext {
-  double get dXLowValue => dynamicHeight(0.005);
-  double get dLowValue => dynamicHeight(0.01);
-  double get dMediumValue => dynamicHeight(0.02);
-  double get dLargeValue => dynamicHeight(0.025);
-  double get dXLargeValue => dynamicHeight(0.03);
-  double get dXxLargeValue => dynamicHeight(0.1);
-
-  double get cLowValue => ConstantSizes.small.value;
-  double get cMediumValue => ConstantSizes.medium.value;
-  double get cLargeValue => ConstantSizes.large.value;
-  double get cXLargeValue => ConstantSizes.xLarge.value;
-  double get cXxLargeValue => ConstantSizes.xxLarge.value;
-}
-
 /// CONSTANT PADDING VALUES
-extension ConstantPaddinExtension on BuildContext {
+extension ConstantPaddingExtension on BuildContext {
   EdgeInsets get cPaddingSmall => EdgeInsets.all(cLowValue);
   EdgeInsets get cPaddingMedium => EdgeInsets.all(cMediumValue);
   EdgeInsets get cPaddingLarge => EdgeInsets.all(cLargeValue);

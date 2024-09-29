@@ -1,7 +1,6 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app_web/core/error/failure.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/survey_entity.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
 
 abstract class CreateSurveyRepository {
   Future<Either<Failure, bool>> shareSurveyInfo({required SurveyEntity entity});
@@ -9,10 +8,6 @@ abstract class CreateSurveyRepository {
     required List<QuestionEntity> questionEntityList,
   });
   Future<Either<Failure, bool>> removeSurvey({
-    required String surveyId,
-  });
-  Future<void> cacheDatasNoInternet({
-    required String path,
     required String surveyId,
   });
 }

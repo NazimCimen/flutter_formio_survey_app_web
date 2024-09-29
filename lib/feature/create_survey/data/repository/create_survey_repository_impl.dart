@@ -1,22 +1,14 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app_web/core/error/failure.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/data/data_source/create_survey_local_data_source.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/data/data_source/create_survey_remote_data_source.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/domain/repository/create_survey_repository.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/data/model/question_model.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/data/model/survey_model.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/survey_entity.dart';
-
-import '../../../shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
 
 class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
-  final CreateSurveyLocalDataSource localDataSource;
   final CreateSurveyRemoteDataSource remoteDataSource;
   CreateSurveyRepositoryImpl({
-    required this.localDataSource,
     required this.remoteDataSource,
   });
 
+  /// IT IS USED TO SAVE SURVEY INFO DATAS IN FIRESTORE
   @override
   Future<Either<Failure, bool>> shareSurveyInfo({
     required SurveyEntity entity,
@@ -26,6 +18,7 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
     return result;
   }
 
+  /// IT IS USED TO SAVE QUESTIONS IN FIRESTORE
   @override
   Future<Either<Failure, bool>> shareQuestions({
     required List<QuestionEntity> questionEntityList,
@@ -41,17 +34,10 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
     return result;
   }
 
+  /// IT IS USED TO REMOVE SURVEY DATAS FROM STORAGE AND FIRESTORE
   @override
   Future<Either<Failure, bool>> removeSurvey({required String surveyId}) async {
     final result = await remoteDataSource.removeSurvey(surveyId: surveyId);
     return result;
-  }
-
-  @override
-  Future<void> cacheDatasNoInternet({
-    required String path,
-    required String surveyId,
-  }) async {
-    await localDataSource.cacheDatasNoInternet(path: path, surveyId: surveyId);
   }
 }
