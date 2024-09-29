@@ -34,6 +34,10 @@ class FailureHandler {
       return ConnectionFailure(
         errorMessage: 'İnternet bağlantı hatası oluştu.',
       );
+    } else if (e is TimeoutException) {
+      return ConnectionFailure(
+        errorMessage: 'Bağlantı zaman aşımına uğradı. Lütfen tekrar deneyin.',
+      );
     } else {
       return UnKnownFaliure(
         errorMessage: 'Bilinmeyen hata oluştu: $e',

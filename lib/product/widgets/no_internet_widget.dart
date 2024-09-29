@@ -6,45 +6,51 @@ import 'package:flutter_survey_app_web/product/widgets/custom_text_widgets.dart'
 
 class NoInternetWidget extends StatelessWidget {
   final VoidCallback refresh;
+  final String title;
   const NoInternetWidget({
     required this.refresh,
+    required this.title,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: context.paddingAllMedium,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            ImageEnums.noInternet.toPathPng,
-            height: context.dynamicHeight(0.1),
+    return Center(
+      child: Padding(
+        padding: context.paddingAllMedium,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                ImageEnums.noInternet.toPathPng,
+                height: context.dynamicHeight(0.1),
+              ),
+              SizedBox(height: context.dynamicHeight(0.01)),
+              CustomTextSubTitleWidget(
+                subTitle: title,
+              ),
+              SizedBox(height: context.dynamicHeight(0.01)),
+              const CustomTextGreySubTitleWidget(
+                maxLine: 3,
+                subTitle:
+                    'İnternet Bağlantınız yok. Bağlantınızı kontrol edip tekrar deneyin',
+              ),
+              SizedBox(height: context.dynamicHeight(0.01)),
+              TextButton(
+                onPressed: refresh,
+                child: Text(
+                  'Yeniden Dene',
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiaryFixed,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: context.dynamicHeight(0.01)),
-          const CustomTextSubTitleWidget(
-            subTitle: 'Bağlantı Hatası',
-          ),
-          SizedBox(height: context.dynamicHeight(0.01)),
-          const CustomTextGreySubTitleWidget(
-            maxLine: 3,
-            subTitle:
-                'İnternet Bağlantınız yok. Bağlantınızı kontrol edip tekrar deneyin',
-          ),
-          SizedBox(height: context.dynamicHeight(0.01)),
-          TextButton(
-            onPressed: refresh,
-            child: Text(
-              'Yeniden Dene',
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.tertiaryFixed,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

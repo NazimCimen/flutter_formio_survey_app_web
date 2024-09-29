@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
-import 'package:flutter_survey_app_web/core/size/padding_extension.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/mixin/add_question_view_mixin.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/widgets/image_input_widgets.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
 import 'package:flutter_survey_app_web/product/componets/custom_snack_bars.dart';
-import 'package:flutter_survey_app_web/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app_web/product/decorations/input_decorations/custom_input_decoration.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_text_widgets.dart';
-import 'package:flutter_survey_app_web/responsive/responsive.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/product/export.dart';
 part '../sub_view/add_question_sub_view.dart';
 
 class AddQuestionView extends StatefulWidget {
@@ -99,7 +90,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
           ),
           SizedBox(height: context.dynamicHeight(0.02)),
           _BottomActionButtons(
-            onPressedCancel: NavigatorService.goBack,
+            onPressedCancel: cancelButton,
             onPressedSave: saveQuestion,
           ),
         ],
@@ -137,7 +128,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
           _buildCheckBoxSection(),
           SizedBox(height: context.dynamicHeight(0.02)),
           _BottomActionButtons(
-            onPressedCancel: NavigatorService.goBack,
+            onPressedCancel: cancelButton,
             onPressedSave: saveQuestion,
           ),
         ],

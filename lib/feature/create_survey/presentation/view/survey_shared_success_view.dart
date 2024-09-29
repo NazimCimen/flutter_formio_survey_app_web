@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_survey_app_web/config/routes/app_routes.dart';
-import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
-import 'package:flutter_survey_app_web/core/size/padding_extension.dart';
-import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/product/componets/custom_snack_bars.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_text_widgets.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/config/export.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/product/componets/export.dart';
+import 'package:flutter_survey_app_web/product/export.dart';
 
 class SurveySharedSuccessView extends StatelessWidget {
-  final String surveyLink;
   const SurveySharedSuccessView({
-    required this.surveyLink,
     super.key,
   });
 
@@ -21,24 +15,26 @@ class SurveySharedSuccessView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const _AppBar(),
-      body: Padding(
-        padding: context.paddingAllMedium,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Image.asset(
-                ImageEnums.success.toPathPng,
-                height: context.dynamicHeight(0.1),
-              ),
-              SizedBox(height: context.dynamicHeight(0.02)),
-              const CustomTextSubTitleWidget(
-                subTitle: 'Anketiniz Başarılı bir şekilde oluşturuldu.',
-              ),
-              SizedBox(height: context.dynamicHeight(0.02)),
-              const _ShareSurvey(),
-            ],
+      body: Center(
+        child: Padding(
+          padding: context.paddingAllMedium,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset(
+                  ImageEnums.success.toPathPng,
+                  height: context.dynamicHeight(0.1),
+                ),
+                SizedBox(height: context.dynamicHeight(0.02)),
+                const CustomTextSubTitleWidget(
+                  subTitle: 'Anketiniz Başarılı bir şekilde oluşturuldu.',
+                ),
+                SizedBox(height: context.dynamicHeight(0.02)),
+                const _ShareSurvey(),
+              ],
+            ),
           ),
         ),
       ),

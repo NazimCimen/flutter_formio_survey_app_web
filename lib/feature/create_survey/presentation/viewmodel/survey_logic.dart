@@ -1,14 +1,7 @@
-import 'dart:typed_data';
-
-import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app_web/core/error/failure.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/domain/usecase/share_questions_use_case.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
-import 'package:flutter_survey_app_web/feature/image_process/presentation/image_helper.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/survey_entity_extension.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/feature/image_process/export.dart';
+import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
 
 class SurveyLogic {
   final ImageHelper imageHelper;
@@ -22,12 +15,16 @@ class SurveyLogic {
     required this.shareQuestionsUseCase,
   });
 
+  /// Shares the survey along with its questions and images.
+  /// This method handles the process of uploading the survey image, converting
+  /// question images to URLs, updating the survey entity with image URLs, and
+  /// sharing both the survey and its questions.
   Future<Either<Failure, bool>> shareSurvey({
     required SurveyEntity surveyEntity,
     required Uint8List? selectedSurveyImageBytes,
     required Map<QuestionEntity, Uint8List?> questionEntityMap,
   }) async {
-    // 1. Anketin görseli yüklenir
+    // 1. Uploads the survey image if it exists.
     String? imageUrl;
     Failure? failure;
     if (selectedSurveyImageBytes != null) {
@@ -47,7 +44,7 @@ class SurveyLogic {
     if (failure != null) {
       return Left(failure!);
     }
-    // 2. Soruların image url'leri alınır ve question entity'ye eklenir
+    // 2. Converts question images to URLs and updates each question entity.
     final questionsResult = await _convertFromMapToEntityList(
       questionEntityMap: questionEntityMap,
       path: surveyEntity.surveyStoragePath,
@@ -64,7 +61,7 @@ class SurveyLogic {
     if (failure != null) {
       return Left(failure!);
     }
-    // 3. Anket paylaşılır
+    // 3. Shares the survey by updating its metadata and saving it in the database.
     final updatedSurveyEntity = surveyEntity.copyWith(
       surveyImageUrl: imageUrl,
       publicationDate: DateTime.now().toUtc(),
@@ -89,7 +86,7 @@ class SurveyLogic {
       return Left(failure!);
     }
 
-    // 4. Sorular paylaşılır
+    // 4. Shares the questions by uploading their details to the database.
     final questionsResultUpload =
         await shareQuestionsUseCase.call(questionEntityList: questions);
     questionsResultUpload.fold(
@@ -109,24 +106,19 @@ class SurveyLogic {
     }
   }
 
+  /// Removes the survey from the database by its survey ID.
+  /// This method ensures that the survey is deleted from the database
+  /// if the `surveyId` is provided.
   Future<void> removeSurvey({required String? surveyId}) async {
     if (surveyId != null) {
-      final response = await removeSurveyUseCase.call(surveyId: surveyId);
-      response.fold(
-        (fail) {
-          if (fail is! ConnectionFailure) {
-            /// crashlytics+loglama
-          }
-        },
-        (succes) {
-          if (!succes) {
-            /// crashlytics+loglama
-          }
-        },
-      );
+      await removeSurveyUseCase.call(surveyId: surveyId);
     }
   }
 
+  /// Converts a map of questions and images to a list of `QuestionEntity` objects.
+  /// If a question has an associated image, the image is uploaded and its URL
+  /// is added to the question entity. If no image is provided, the question is
+  /// added with its existing data.
   Future<Either<Failure, List<QuestionEntity>>> _convertFromMapToEntityList({
     required Map<QuestionEntity, Uint8List?> questionEntityMap,
     required String path,
