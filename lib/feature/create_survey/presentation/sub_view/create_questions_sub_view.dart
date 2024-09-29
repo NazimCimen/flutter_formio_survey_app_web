@@ -17,14 +17,15 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: InkWell(
             onTap: shareSurvey,
             child: TextButton.icon(
-                onPressed: shareSurvey,
-                icon: const Icon(Icons.share_outlined),
-                label: Text(
-                  'Publish Survey',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                )),
+              onPressed: shareSurvey,
+              icon: const Icon(Icons.share_outlined),
+              label: Text(
+                'Publish Survey',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
+              ),
+            ),
           ),
         ),
       ],
@@ -140,8 +141,11 @@ class _CustomFloatingActionButton extends StatelessWidget {
               cropRatio: ImageAspectRatioEnum.surveyImage.ratioCrop,
             );
 
-        ///MARK:CONTEXT FIX
-        context.read<CreateSurveyViewModel>().setState(ViewState.inActive);
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+            context.read<CreateSurveyViewModel>().setState(ViewState.inActive);
+          },
+        );
       },
     );
   }
@@ -261,18 +265,21 @@ class _QuestionOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: questionEntity.type != QuestionType.openEnded,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const CustomTextSubTitleWidget(
-          subTitle: 'Question Options',
-        ),
-        ...List.generate(
-          questionEntity.options != null ? questionEntity.options!.length : 0,
-          (index) => CustomTextGreySubTitleWidget(
-            maxLine: 2,
-            subTitle: '•  ${questionEntity.options?[index] ?? ''}',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextSubTitleWidget(
+            subTitle: 'Question Options',
           ),
-        )
-      ]),
+          ...List.generate(
+            questionEntity.options != null ? questionEntity.options!.length : 0,
+            (index) => CustomTextGreySubTitleWidget(
+              maxLine: 2,
+              subTitle: '•  ${questionEntity.options?[index] ?? ''}',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

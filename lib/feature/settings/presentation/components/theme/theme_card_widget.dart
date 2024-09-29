@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/config/localization/string_constanrs.dart';
 import 'package:flutter_survey_app_web/config/theme/theme_manager.dart';
 import 'package:flutter_survey_app_web/core/size/padding_extension.dart';
-import 'package:flutter_survey_app_web/core/utils/app_border_radius_extensions.dart';
+import 'package:flutter_survey_app_web/core/size/app_border_radius_extensions.dart';
 import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
 import 'package:flutter_survey_app_web/feature/settings/presentation/view/settings_view.dart';
 import 'package:provider/provider.dart';

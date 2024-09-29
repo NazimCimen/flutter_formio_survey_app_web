@@ -29,13 +29,7 @@ class AppRoutes {
               ModalRoute.of(context)!.settings.arguments! as QuestionEntity;
           return AddQuestionView(entity: questionEntity);
         },
-        surveySharedSuccessView: (context) {
-          final surveyLink =
-              ModalRoute.of(context)!.settings.arguments! as String;
-          return SurveySharedSuccessView(
-            surveyLink: surveyLink,
-          );
-        },
+        surveySharedSuccessView: (context) => const SurveySharedSuccessView(),
         profileView: (context) => const ProfileView(),
         // settingsView: (context) => const SettingsView(),
         answerSurveyView: (context) {

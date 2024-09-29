@@ -1,14 +1,9 @@
 import 'dart:typed_data';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_survey_app_web/core/error/failure.dart';
 import 'package:flutter_survey_app_web/core/error/failure_handler.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/data/model/question_model.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/data/model/survey_model.dart';
-import 'package:flutter_survey_app_web/product/firebase/firebase_collection_enum.dart';
-import 'package:flutter_survey_app_web/product/firebase/firebase_converter.dart';
+import 'package:flutter_survey_app_web/core/error/timeout.dart';
 
 abstract class ImageProcessRemoteSource {
   Future<Either<Failure, String>> getImageUrl({
@@ -27,9 +22,9 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
   ImageProcessRemoteSourceImpl({
     required this.storage,
   });
-  @override
 
-  /// nulll check
+  /// IT IS USED TO GET IMAGE URL OF SURVEY COVER IMAGE
+  @override
   Future<Either<Failure, String>> getImageUrl({
     required Uint8List imageBytes,
     required String path,
@@ -39,8 +34,19 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
       final uniqueFileName =
           '$path${DateTime.now().millisecondsSinceEpoch}.png';
       final imageRef = storageRef.child(uniqueFileName);
-      await imageRef.putData(imageBytes);
-      final urlPath = await imageRef.getDownloadURL();
+      await imageRef.putData(imageBytes).timeout(
+        TimeoutHandler.timeoutDuration,
+        onTimeout: () {
+          throw TimeoutHandler.timeoutException;
+        },
+      );
+
+      final urlPath = await imageRef.getDownloadURL().timeout(
+        TimeoutHandler.timeoutDuration,
+        onTimeout: () {
+          throw TimeoutHandler.timeoutException;
+        },
+      );
       return Right(urlPath);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e: e));
@@ -52,10 +58,20 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
     required String path,
   }) async {
     try {
-      final listResult = await storage.ref(path).listAll();
+      final listResult = await storage.ref(path).listAll().timeout(
+        TimeoutHandler.timeoutDuration,
+        onTimeout: () {
+          throw TimeoutHandler.timeoutException;
+        },
+      );
 
       for (final ref in listResult.items) {
-        await ref.delete();
+        await ref.delete().timeout(
+          TimeoutHandler.timeoutDuration,
+          onTimeout: () {
+            throw TimeoutHandler.timeoutException;
+          },
+        );
       }
       return const Right(true);
     } catch (e) {

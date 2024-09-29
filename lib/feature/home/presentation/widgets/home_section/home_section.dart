@@ -3,7 +3,7 @@ import 'package:flutter_survey_app_web/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_web/core/size/padding_extension.dart';
 import 'package:flutter_survey_app_web/responsive/responsive.dart';
-import 'package:flutter_survey_app_web/core/utils/app_border_radius_extensions.dart';
+import 'package:flutter_survey_app_web/core/size/app_border_radius_extensions.dart';
 import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
 
 class HomeSection extends StatelessWidget {

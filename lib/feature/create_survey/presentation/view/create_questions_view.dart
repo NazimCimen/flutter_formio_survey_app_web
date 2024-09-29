@@ -1,27 +1,9 @@
-import 'dart:typed_data';
+import 'package:flutter_survey_app_web/config/export.dart';
+import 'package:flutter_survey_app_web/core/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_survey_app_web/config/routes/app_routes.dart';
-import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_web/core/size/padding_extension.dart';
-import 'package:flutter_survey_app_web/core/utils/app_border_radius_extensions.dart';
-import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/mixin/create_questions_view_mixin.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/survey_shared_success_view.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app_web/product/decorations/box_decorations/custom_box_decoration.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_error_widget.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_progress_indicator.dart';
-import 'package:flutter_survey_app_web/product/widgets/custom_text_widgets.dart';
-import 'package:flutter_survey_app_web/product/widgets/no_internet_widget.dart';
-import 'package:flutter_survey_app_web/responsive/responsive.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
-
+import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
+import 'package:flutter_survey_app_web/product/export.dart';
 part '../sub_view/create_questions_sub_view.dart';
 
 class CreateQuestionsView extends StatefulWidget {
@@ -45,7 +27,7 @@ class CreateQuestionsViewState extends State<CreateQuestionsView>
           isDialOpen: isDialOpen,
         ),
         appBar: _CustomAppBar(
-          shareSurvey: shareSurvey,
+          shareSurvey: publishSurvey,
         ),
         body: SafeArea(
           child: Padding(
@@ -61,14 +43,13 @@ class CreateQuestionsViewState extends State<CreateQuestionsView>
                   return const CustomProgressIndicator();
                 } else if (viewModel.state == ViewState.noInternet) {
                   return NoInternetWidget(
+                    title: 'Anketiniz Yayınlanamadı...',
                     refresh: () async {
-                      // await viewModel.checkConnectivity();
+                      await viewModel.checkConnectivity();
                     },
                   );
                 } else if (viewModel.state == ViewState.success) {
-                  return SurveySharedSuccessView(
-                    surveyLink: viewModel.getSurveyLink(),
-                  );
+                  return const SurveySharedSuccessView();
                 } else if (viewModel.questionEntityMap.isNotEmpty ||
                     viewModel.selectedSurveyImageBytes != null) {
                   if (Responsive.isMobile(context)) {

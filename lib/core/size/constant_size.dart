@@ -24,3 +24,13 @@ extension AppSizeExtension on ConstantSizes {
 
   BorderRadius get borderRadius => BorderRadius.circular(size);
 }
+
+///c:constant
+///cLowValue: constant low value
+extension ConstantSizeExtension on BuildContext {
+  double get cLowValue => ConstantSizes.small.value;
+  double get cMediumValue => ConstantSizes.medium.value;
+  double get cLargeValue => ConstantSizes.large.value;
+  double get cXLargeValue => ConstantSizes.xLarge.value;
+  double get cXxLargeValue => ConstantSizes.xxLarge.value;
+}

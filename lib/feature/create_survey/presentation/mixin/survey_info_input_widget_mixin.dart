@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_web/config/routes/app_routes.dart';
-import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_web/core/utils/type_parser.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/create_survey_info_view.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/product/componets/custom_snack_bars.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/config/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
 
 mixin SurveyInfoInputWidgetMixin on State<SurveyInfoInputWidget> {
   late TextEditingController surveyTitleController;
@@ -72,15 +66,18 @@ mixin SurveyInfoInputWidgetMixin on State<SurveyInfoInputWidget> {
     }
   }
 
+  /// Initializes the form controllers with default values from the ViewModel
   void getSurveyInfoDefaultValues() {
     final survey = context.read<CreateSurveyViewModel>().surveyEntity;
     surveyTitleController = TextEditingController(text: survey.surveyTitle);
     surveyDescriptionController =
         TextEditingController(text: survey.surveyDescription);
     startDateController = TextEditingController(
-        text: survey.startDate != null ? survey.startDate.toString() : '');
+      text: survey.startDate != null ? survey.startDate.toString() : '',
+    );
     endDateController = TextEditingController(
-        text: survey.endDate != null ? survey.endDate.toString() : '');
+      text: survey.endDate != null ? survey.endDate.toString() : '',
+    );
     surveyTimeInMinute = TextEditingController(
       text: survey.surveyTimeInMinute != null
           ? survey.surveyTimeInMinute.toString()
@@ -93,11 +90,13 @@ mixin SurveyInfoInputWidgetMixin on State<SurveyInfoInputWidget> {
     context.read<CreateSurveyViewModel>().resetViewModel();
   }
 
+  /// Closes the page and resets the ViewModel state
   void closePage() {
     context.read<CreateSurveyViewModel>().resetViewModel();
     NavigatorService.goBack();
   }
 
+  /// Opens a date picker to select the start date, updating the startDateController with the selected date
   Future<void> selectStartDate(BuildContext context) async {
     final picked = await showDatePicker(
       context: context,
@@ -114,6 +113,7 @@ mixin SurveyInfoInputWidgetMixin on State<SurveyInfoInputWidget> {
     }
   }
 
+  /// Opens a date picker to select the end date, updating the endDateController with the selected date
   Future<void> selectEndDate(BuildContext context) async {
     final picked = await showDatePicker(
       context: context,

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_web/config/routes/app_routes.dart';
-import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/create_questions_view.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_web/product/componets/custom_snack_bars.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/config/export.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/product/componets/export.dart';
 
 mixin CreateQuestionsViewMixin on State<CreateQuestionsView> {
-  Future<void> shareSurvey() async {
-    await context.read<CreateSurveyViewModel>().shareSurvey();
+  ///Punlish survey and refresh state according to result
+  Future<void> publishSurvey() async {
+    await context.read<CreateSurveyViewModel>().publishSurvey();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         if (context.read<CreateSurveyViewModel>().state ==
@@ -20,8 +18,9 @@ mixin CreateQuestionsViewMixin on State<CreateQuestionsView> {
         } else if (context.read<CreateSurveyViewModel>().state ==
             ViewState.success) {
           NavigatorService.pushNamedAndRemoveUntil(
-              AppRoutes.surveySharedSuccessView,
-              arguments: context.read<CreateSurveyViewModel>().getSurveyLink());
+            AppRoutes.surveySharedSuccessView,
+            arguments: context.read<CreateSurveyViewModel>().getSurveyLink(),
+          );
         }
       },
     );

@@ -19,6 +19,7 @@ enum ImageEnums {
   webtest12,
   webtest13,
   webtest14,
+  logo,
   appStore,
   playStore,
   success,

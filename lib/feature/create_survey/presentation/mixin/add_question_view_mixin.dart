@@ -1,10 +1,7 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_web/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/add_question_view.dart';
-import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
+import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
 
 mixin AddQuestionViewMixin on State<AddQuestionView> {
   late TextEditingController titleController;
@@ -36,13 +33,21 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     super.didChangeDependencies();
   }
 
-  /// this method overrided in view
+  /// Method to show a snackbar with an error message, overridden in the view
   void showSnackBar({required String errorMsg});
 
+  /// Method to delete the selected image
   void deleteImage() {
     context.read<CreateSurveyViewModel>().resetQuestionImage();
   }
 
+  /// Method to handle the cancel button action
+  void cancelButton() {
+    context.read<CreateSurveyViewModel>().resetQuestionImage();
+    NavigatorService.goBack();
+  }
+
+  /// Method to save the question with its input data
   void saveQuestion() {
     final options = <String>[];
     for (final option in inputOptions) {
@@ -76,6 +81,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to initialize default values for the input fields
   void getDefaultValues() {
     selectedImageBytes =
         context.read<CreateSurveyViewModel>().selectedQuestionFileBytes;
@@ -92,6 +98,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to add a new option field
   void addNewOption() {
     final isValidate = validateOptionFields();
     if (isValidate) {
@@ -99,6 +106,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to delete an option field
   void deleteOption(int index) {
     if (inputOptions.length != 1) {
       setState(() {
@@ -107,6 +115,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to validate the option fields
   bool validateOptionFields() {
     var isEmpty = false;
     setState(() {});
@@ -124,6 +133,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to toggle the 'required' checkbox
   void isRequiredCheckBoxPressed({bool? value}) {
     if (value != null) {
       setState(() {
@@ -132,6 +142,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to toggle the 'multiple choice' checkbox
   void isMultipleChoiceCheckBoxPressed({bool? value}) {
     if (value != null) {
       setState(() {
@@ -140,6 +151,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Method to toggle the 'other' checkbox
   void isOtherCheckBoxPressed({bool? value}) {
     if (value != null) {
       setState(() {
