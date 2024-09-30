@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/core/size/app_border_radius_extensions.dart';
 import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
-import 'package:flutter_survey_app_web/product/constants/web/feature_items.dart';
+import 'package:flutter_survey_app_web/product/constants/feature_items.dart';
 import 'package:flutter_survey_app_web/product/decorations/box_decorations/custom_box_decoration.dart';
 import 'package:flutter_survey_app_web/product/widgets/register_button_widget.dart';
 import 'package:flutter_survey_app_web/responsive/responsive.dart';

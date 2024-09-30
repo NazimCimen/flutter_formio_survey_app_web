@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CustomInputDecoration {
-  CustomInputDecoration._();
+@immutable
+final class CustomInputDecoration {
+  const CustomInputDecoration._();
   static InputDecoration inputDecoration({
     required BuildContext context,
     required String hintText,

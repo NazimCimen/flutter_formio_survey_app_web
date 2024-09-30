@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/core/size/constant_size.dart';
 
-class CustomBoxDecoration {
-  CustomBoxDecoration._();
+@immutable
+final class CustomBoxDecoration {
+  const CustomBoxDecoration._();
   static BoxDecoration customBoxDecorationForImage(BuildContext context) {
     return BoxDecoration(
       borderRadius: ConstantSizes.small.borderRadius,

@@ -76,7 +76,7 @@ class _SurveyInfoInputWidgetState extends State<SurveyInfoInputWidget>
                     maxLines: 1,
                     controller: surveyTitleController,
                     validator: (value) =>
-                        AppValidators().surveyTitleValidator(value),
+                        AppValidators.surveyTitleValidator(value),
                     keyboardType: TextInputType.text,
                   ),
                   SizedBox(height: ConstantSizes.medium.value),
@@ -86,7 +86,7 @@ class _SurveyInfoInputWidgetState extends State<SurveyInfoInputWidget>
                     maxLines: 4,
                     controller: surveyDescriptionController,
                     validator: (value) =>
-                        AppValidators().surveyDescriptionValidator(value),
+                        AppValidators.surveyDescriptionValidator(value),
                     keyboardType: TextInputType.multiline,
                     textInputAction: TextInputAction.none,
                   ),
@@ -99,7 +99,7 @@ class _SurveyInfoInputWidgetState extends State<SurveyInfoInputWidget>
                         hintText: 'Select Start Date',
                         controller: startDateController,
                         validator: (value) =>
-                            AppValidators().startDateValidator(value),
+                            AppValidators.startDateValidator(value),
                         keyboardType: TextInputType.none,
                         maxLines: 1,
                       ),
@@ -114,7 +114,7 @@ class _SurveyInfoInputWidgetState extends State<SurveyInfoInputWidget>
                         hintText: 'Select End Date',
                         controller: endDateController,
                         validator: (value) =>
-                            AppValidators().endDateValidator(value),
+                            AppValidators.endDateValidator(value),
                         maxLines: 1,
                         keyboardType: TextInputType.none,
                       ),
@@ -127,7 +127,7 @@ class _SurveyInfoInputWidgetState extends State<SurveyInfoInputWidget>
                     maxLines: 1,
                     controller: surveyTimeInMinute,
                     validator: (value) =>
-                        AppValidators().durationInMinuteValidator(value),
+                        AppValidators.durationInMinuteValidator(value),
                     keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: ConstantSizes.medium.value),
@@ -186,7 +186,7 @@ class _LeftSide extends StatelessWidget {
                 Icon(
                   size: 40,
                   Icons.arrow_back_ios_new,
-                  shadows: CustomShadows.customLowShadow(),
+                  shadows: CustomShadows.customLowShadow(context),
                 ),
                 Text(
                   'Formio',

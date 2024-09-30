@@ -113,7 +113,7 @@ void setupLocator() {
         shareLink: serviceLocator<LinkSharingHelper>(),
         connectivity: serviceLocator<INetworkInfo>(),
       ),
-    ) //////////////////////////////////////////////////////////////////////////
+    )
     ..registerLazySingleton<ImageProcessRemoteSource>(
       () => ImageProcessRemoteSourceImpl(
         storage: serviceLocator<FirebaseStorage>(),
@@ -149,5 +149,4 @@ void setupLocator() {
         removeSurveyImagesUseCase: serviceLocator<RemoveSurveyImagesUseCase>(),
       ),
     );
-  //////////////////////////////////////////////////////////////////////////;
 }

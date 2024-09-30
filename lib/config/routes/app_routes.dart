@@ -9,7 +9,10 @@ import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/c
 import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/create_survey_info_view.dart';
 import 'package:flutter_survey_app_web/feature/profile/presentation/view/profile_view.dart';
 
-class AppRoutes {
+@immutable
+final class AppRoutes {
+  const AppRoutes._();
+
   static const String initialRoute = '/homeView';
   static const String homeView = '/homeView';
   static const String profileView = '/profileView';

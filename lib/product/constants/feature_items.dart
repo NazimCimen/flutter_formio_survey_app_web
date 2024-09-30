@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FeatureItem {
-  final IconData icon;
-  final String text;
-
-  FeatureItem({
-    required this.icon,
-    required this.text,
-  });
-}
-
-class FeatureItems {
-  FeatureItems._();
-  static List<FeatureItem> drawerItems = [
+@immutable
+final class FeatureItems {
+  const FeatureItems._();
+  static List<FeatureItem> drawerItems = const [
     FeatureItem(
       icon: Icons.home_outlined,
       text: 'Home',
@@ -30,4 +21,15 @@ class FeatureItems {
       text: 'About',
     ),
   ];
+}
+
+@immutable
+final class FeatureItem {
+  final IconData icon;
+  final String text;
+
+  const FeatureItem({
+    required this.icon,
+    required this.text,
+  });
 }

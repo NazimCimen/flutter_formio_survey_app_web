@@ -1,5 +1,8 @@
-class TypeParser {
-  TypeParser._();
+import 'package:flutter/material.dart';
+
+@immutable
+final class TypeParser {
+  const TypeParser._();
 
   static DateTime? parseDateTime(String dateString) {
     try {

@@ -3,7 +3,8 @@ import 'package:flutter_survey_app_web/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_web/feature/create_survey/presentation/view/create_questions_view.dart';
 
 @immutable
-class NavigatorService {
+final class NavigatorService {
+  const NavigatorService._();
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static Future<dynamic> pushNamed(

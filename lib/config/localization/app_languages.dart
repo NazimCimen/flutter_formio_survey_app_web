@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-class AppLanguages {
+final class AppLanguages {
   final String name;
   final String flagName;
   final Locale locale;

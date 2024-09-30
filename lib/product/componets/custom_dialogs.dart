@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_survey_app_web/core/size/app_border_radius_extensions.dart';
 import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
 
 @immutable
-class CustomDialogs {
+final class CustomDialogs {
   const CustomDialogs._();
   static void showMyDialog(
           {required BuildContext context, required bool condition}) =>

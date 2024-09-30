@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class CustomSnackBars {
+final class CustomSnackBars {
   const CustomSnackBars._();
   static void showCustomScaffoldSnackBar({
     required BuildContext context,

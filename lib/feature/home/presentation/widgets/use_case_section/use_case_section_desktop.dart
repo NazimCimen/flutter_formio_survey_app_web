@@ -21,7 +21,7 @@ class UseCaseSectionDesktop extends StatelessWidget {
               children: [
                 Flexible(
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: 500),
+                    constraints: const BoxConstraints(minWidth: 500),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,

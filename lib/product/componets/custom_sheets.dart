@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CustomSheets {
-  CustomSheets._();
+@immutable
+final class CustomSheets {
+  const CustomSheets._();
   static Future<ImageSource?> showMenuForImage({
     required BuildContext context,
   }) async {

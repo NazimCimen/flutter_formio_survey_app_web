@@ -3,11 +3,6 @@ class ServerException implements Exception {
   final String? description;
 }
 
-class CacheException implements Exception {
-  CacheException(this.description);
-  final String? description;
-}
-
 class ConnectionException implements Exception {
   ConnectionException(this.description);
   final String? description;
