@@ -32,9 +32,13 @@ jobs:
           echo "    }" >> lib/firebase_options.dart
           echo "    switch (defaultTargetPlatform) {" >> lib/firebase_options.dart
           echo "      case TargetPlatform.android:" >> lib/firebase_options.dart
-          echo "        return android;" >> lib/firebase_options.dart
+          echo "        throw UnsupportedError(" >> lib/firebase_options.dart
+          echo "        'DefaultFirebaseOptions have not been configured for android - '" >> lib/firebase_options.dart
+          echo "        'you can reconfigure this by running the FlutterFire CLI again.',);" >> lib/firebase_options.dart
           echo "      case TargetPlatform.iOS:" >> lib/firebase_options.dart
-          echo "        return ios;" >> lib/firebase_options.dart
+          echo "        throw UnsupportedError(" >> lib/firebase_options.dart
+          echo "        'DefaultFirebaseOptions have not been configured for android - '" >> lib/firebase_options.dart
+          echo "        'you can reconfigure this by running the FlutterFire CLI again.',);" >> lib/firebase_options.dart
           echo "      default:" >> lib/firebase_options.dart
           echo "        throw UnsupportedError('DefaultFirebaseOptions are not supported for this platform.');" >> lib/firebase_options.dart
           echo "    }" >> lib/firebase_options.dart
