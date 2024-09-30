@@ -7,7 +7,6 @@ class AnswerSurveyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SurveyId'yi kullanarak anket verilerini alıp formu burada oluşturun
     return Scaffold(
       appBar: AppBar(
         title: Text('Anket Yanıtla'),
@@ -21,7 +20,6 @@ class AnswerSurveyView extends StatelessWidget {
   }
 }
 
-// Anket formunu oluşturduğunuz widget
 class SurveyForm extends StatelessWidget {
   final String surveyId;
 
@@ -29,12 +27,10 @@ class SurveyForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SurveyId'yi kullanarak anket verilerini alıp formu burada oluşturun
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text('Anket ID: $surveyId'),
-        // Anket formu widget'ı burada olacak
       ],
     );
   }
