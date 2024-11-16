@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     implements BaseFirebaseService<T> {
   final FirebaseFirestore firestore;
-
   FirebaseServiceImpl({
     required this.firestore,
   });
@@ -21,7 +20,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
         .timeout(
       AppDurations.timeoutDuration,
       onTimeout: () {
-        throw TimeoutException('Image upload timed out');
+        throw TimeoutException('timeout');
       },
     );
   }
@@ -35,7 +34,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
         .timeout(
       AppDurations.timeoutDuration,
       onTimeout: () {
-        throw TimeoutException('Image upload timed out');
+        throw TimeoutException('timeout');
       },
     );
   }
@@ -48,7 +47,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     await firestore.collection(collectionPath).doc(docId).delete().timeout(
       AppDurations.timeoutDuration,
       onTimeout: () {
-        throw TimeoutException('Image upload timed out');
+        throw TimeoutException('timeout');
       },
     );
   }
@@ -63,7 +62,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
         await doc.reference.delete().timeout(
           AppDurations.timeoutDuration,
           onTimeout: () {
-            throw TimeoutException('Image upload timed out');
+            throw TimeoutException('timeout');
           },
         );
       }
@@ -71,11 +70,32 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
   }
 
   @override
+  Future<Map<String, dynamic>> getItem({
+    required String collectionPath,
+    required String docId,
+  }) async {
+    final snapshot =
+        await firestore.collection(collectionPath).doc(docId).get().timeout(
+      AppDurations.timeoutDuration,
+      onTimeout: () {
+        throw TimeoutException('timeout');
+      },
+    );
+    ;
+    final data = snapshot.data();
+
+    if (data == null) {
+      throw ServerException('Data not found');
+    }
+
+    return data;
+  }
+
+  @override
   Future<List<T>> getItems(String collectionPath) {
     // TODO: implement getItems
     throw UnimplementedError();
   }
-
   /* @override
   Future<List<T>> getItems(String collectionPath) async {
     final snapshot = await firestore.collection(collectionPath).get();

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/config/localization/locale_constants.dart';
 import 'package:flutter_survey_app_web/config/theme/theme_manager.dart';
 import 'package:flutter_survey_app_web/dependency_injection/dependency_injection.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/presentation/viewmodel/answer_survey_view_model.dart';
 import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
 import 'package:flutter_survey_app_web/firebase_options.dart';
 import 'package:flutter_survey_app_web/main.dart';
@@ -40,6 +41,9 @@ class AppInitImpl extends AppInit {
           ),
           ChangeNotifierProvider<CreateSurveyViewModel>(
             create: (_) => serviceLocator<CreateSurveyViewModel>(),
+          ),
+          ChangeNotifierProvider<AnswerSurveyViewModel>(
+            create: (_) => serviceLocator<AnswerSurveyViewModel>(),
           ),
         ],
         child: const MyApp(),

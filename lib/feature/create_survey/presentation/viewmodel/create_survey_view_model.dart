@@ -5,16 +5,8 @@ import 'package:flutter_survey_app_web/core/export.dart';
 import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
 import 'package:flutter_survey_app_web/feature/image_process/export.dart';
 import 'package:flutter_survey_app_web/feature/shared_layers/export.dart';
+import 'package:flutter_survey_app_web/product/enum/state_enum.dart';
 import 'package:flutter_survey_app_web/product/export.dart';
-
-enum ViewState {
-  inActive,
-  error,
-  success,
-  loading,
-  noInternet,
-  noAddedQuestion
-}
 
 class CreateSurveyViewModel extends ChangeNotifier {
   final ImageHelper imageHelper;

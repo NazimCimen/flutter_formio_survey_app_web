@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AnswerSurveyView extends StatelessWidget {
+class AnswerSurveyView extends StatefulWidget {
   final String? surveyId;
 
-  AnswerSurveyView({required this.surveyId});
+  const AnswerSurveyView({
+    required this.surveyId,
+    super.key,
+  });
 
+  @override
+  State<AnswerSurveyView> createState() => _AnswerSurveyViewState();
+}
+
+class _AnswerSurveyViewState extends State<AnswerSurveyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,8 +20,8 @@ class AnswerSurveyView extends StatelessWidget {
         title: Text('Anket Yanıtla'),
       ),
       body: Center(
-        child: surveyId != null
-            ? SurveyForm(surveyId: surveyId!)
+        child: widget.surveyId != null
+            ? SurveyForm(surveyId: widget.surveyId!)
             : Text('Anket bulunamadı.'),
       ),
     );

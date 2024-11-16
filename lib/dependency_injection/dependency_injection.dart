@@ -1,6 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_survey_app_web/core/connection/network_info.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/data/data_source/answer_survey_remote_data_source.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/data/repository/answer_survey_repository_impl.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/domain/repository/answer_survey_repository.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/domain/usecase/get_survey_info_use_case.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/presentation/viewmodel/answer_survey_view_model.dart';
 import 'package:flutter_survey_app_web/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
 import 'package:flutter_survey_app_web/feature/create_survey/presentation/viewmodel/survey_logic.dart';
 import 'package:flutter_survey_app_web/feature/image_process/data/data_source/image_process_local_source.dart';
@@ -130,11 +135,13 @@ void setupLocator() {
     )
     ..registerLazySingleton<GetImageUrlUseCase>(
       () => GetImageUrlUseCase(
-          repository: serviceLocator<ImageProcessRepository>()),
+        repository: serviceLocator<ImageProcessRepository>(),
+      ),
     )
     ..registerLazySingleton<GetImageFileUseCase>(
       () => GetImageFileUseCase(
-          repository: serviceLocator<ImageProcessRepository>()),
+        repository: serviceLocator<ImageProcessRepository>(),
+      ),
     )
     ..registerLazySingleton<CropImageUseCase>(
       () => CropImageUseCase(
@@ -147,6 +154,26 @@ void setupLocator() {
         getImageUrlUseCase: serviceLocator<GetImageUrlUseCase>(),
         getImageUseCase: serviceLocator<GetImageFileUseCase>(),
         removeSurveyImagesUseCase: serviceLocator<RemoveSurveyImagesUseCase>(),
+      ),
+    )
+    ..registerLazySingleton<AnswerSurveyRemoteDataSource>(
+      () => AnswerSurveyRemoteDataSourceImpl(
+        service: serviceLocator<BaseFirebaseService<SurveyModel>>(),
+      ),
+    )
+    ..registerLazySingleton<AnswerSurveyRepository>(
+      () => AnswerSurveyRepositoryImpl(
+        remoteDataSource: serviceLocator<AnswerSurveyRemoteDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<GetSurveyInfoUseCase>(
+      () => GetSurveyInfoUseCase(
+        serviceLocator<AnswerSurveyRepository>(),
+      ),
+    )
+    ..registerLazySingleton<AnswerSurveyViewModel>(
+      () => AnswerSurveyViewModel(
+        getSurveyInfoUseCase: serviceLocator<GetSurveyInfoUseCase>(),
       ),
     );
 }

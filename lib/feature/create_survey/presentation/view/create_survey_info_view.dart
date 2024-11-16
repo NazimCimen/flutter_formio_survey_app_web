@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/core/export.dart';
 import 'package:flutter_survey_app_web/feature/create_survey/export.dart';
 import 'package:flutter_survey_app_web/product/constants/custom_shadows.dart';
+import 'package:flutter_survey_app_web/product/enum/state_enum.dart';
 
 class CreateSurveyInfoView extends StatefulWidget {
   const CreateSurveyInfoView({super.key});

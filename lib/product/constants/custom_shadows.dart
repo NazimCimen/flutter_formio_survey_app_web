@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 @immutable
 final class CustomShadows {
   const CustomShadows._();
-
   static List<Shadow> customLowShadow(BuildContext context) => [
         Shadow(
           offset: const Offset(1.5, 1.5),

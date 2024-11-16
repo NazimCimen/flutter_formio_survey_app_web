@@ -6,7 +6,7 @@ import 'package:flutter_survey_app_web/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_web/config/theme/application_theme.dart';
 import 'package:flutter_survey_app_web/config/theme/theme_manager.dart';
 import 'package:flutter_survey_app_web/core/init/app_init.dart';
-import 'package:flutter_survey_app_web/feature/answer_survey/answer_survey_view.dart';
+import 'package:flutter_survey_app_web/feature/answer_survey/presentation/view/answer_survey_view.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/view/home_view.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
           ];
         },
         initialRoute: AppRoutes.initialRoute,
-        // home: CreateQuestionsView(),
       ),
     );
   }

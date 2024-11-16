@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/widgets/feature_section/features_section_tablet.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/widgets/footer_section/footer_section.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/widgets/header/header_desktop.dart';
-import 'package:flutter_survey_app_web/product/widgets/register_button_widget.dart';
-import 'package:flutter_survey_app_web/product/widgets/theme_deneme.dart';
-import 'package:flutter_survey_app_web/product/widgets/theme_widget.dart';
+import 'package:flutter_survey_app_web/feature/home/presentation/widgets/register_button_widget.dart';
 import 'package:flutter_survey_app_web/responsive/responsive.dart';
-import 'package:flutter_survey_app_web/core/size/dynamic_size.dart';
-import 'package:flutter_survey_app_web/core/utils/image_enum.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/mixin/home_view_mixin.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/widgets/home_section/home_section.dart';
 import 'package:flutter_survey_app_web/feature/home/presentation/widgets/feature_section/features_section_desktop.dart';
@@ -47,7 +43,7 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
                 child: HeaderDesktop(
                   sectionNavButton: scrollToSection,
                 ),
-              )
+              ),
           ],
         ),
       ),
@@ -108,12 +104,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       forceMaterialTransparency: true,
-      actions: [
-        RegisterButtonWidget(
-          navigateLogin: () {},
-          navigateSignup: () {},
-        ),
-      ],
     );
   }
 
